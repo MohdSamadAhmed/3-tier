@@ -1,27 +1,33 @@
-🚀 3-Tier Architecture on AWS using Terraform
-📌 Project Overview
+<h1 align="center">🚀 3-Tier Architecture on AWS using Terraform</h1>
 
-This project provisions a 3-Tier Architecture on AWS using Terraform.
+<hr>
 
-The infrastructure includes:
+<h2>📌 1. Project Overview</h2>
 
-Presentation Tier (Frontend)
+<p>
+This project provisions a <strong>3-Tier Architecture</strong> on AWS using Terraform.
+</p>
 
-Application Tier (Backend)
+<h3>Infrastructure Includes:</h3>
+<ul>
+  <li>Presentation Tier (Frontend)</li>
+  <li>Application Tier (Backend)</li>
+  <li>Database Tier (RDS)</li>
+  <li>Secure Networking with VPC</li>
+  <li>Load Balancers</li>
+  <li>Auto Scaling Groups</li>
+  <li>Bastion Host for secure administrative access</li>
+</ul>
 
-Database Tier (RDS)
+<p>
+This architecture follows industry best practices for scalability, security, high availability, and fault tolerance.
+</p>
 
-Secure networking with VPC
+<hr>
 
-Load Balancers
+<h2>🏗 2. Architecture Diagram (Logical Flow)</h2>
 
-Auto Scaling
-
-Bastion Host for secure access
-
-This setup follows industry best practices for scalability, security, and high availability.
-
-🏗 Architecture Diagram (Logical Flow)
+<pre>
 User
   │
   ▼
@@ -38,76 +44,83 @@ Backend EC2 Instances (Auto Scaling Group)
   │
   ▼
 RDS Database (Private Subnet)
+</pre>
 
-🧱 Infrastructure Components
-1️⃣ Networking Layer
+<hr>
 
-Custom VPC
+<h2>🧱 3. Infrastructure Components</h2>
 
-Public Subnets
+<h3>3.1 🌐 Networking Layer</h3>
 
-Private Subnets
+<ul>
+  <li>Custom VPC</li>
+  <li>Public Subnets</li>
+  <li>Private Subnets</li>
+  <li>Internet Gateway</li>
+  <li>NAT Gateway</li>
+  <li>Route Tables</li>
+</ul>
 
-Internet Gateway
+<p><strong>Purpose:</strong> Provides secure network segmentation and controlled internet access.</p>
 
-NAT Gateway
+<hr>
 
-Route Tables
+<h3>3.2 🖥 Presentation Tier (Frontend)</h3>
 
-2️⃣ Presentation Tier (Frontend)
+<ul>
+  <li>Public Application Load Balancer</li>
+  <li>Target Group</li>
+  <li>Launch Template</li>
+  <li>Auto Scaling Group</li>
+  <li>Security Group</li>
+</ul>
 
-Application Load Balancer (Public)
+<p><strong>Purpose:</strong> Handles user traffic and forwards requests to backend servers.</p>
 
-Target Group
+<hr>
 
-Launch Template
+<h3>3.3 ⚙ Application Tier (Backend)</h3>
 
-Auto Scaling Group
+<ul>
+  <li>Internal Load Balancer</li>
+  <li>Target Group</li>
+  <li>Launch Template</li>
+  <li>Auto Scaling Group</li>
+  <li>Private Subnets</li>
+  <li>Security Group</li>
+</ul>
 
-Security Group
+<p><strong>Purpose:</strong> Processes business logic and communicates securely with the database tier.</p>
 
-Purpose:
-Handles user traffic and forwards requests to backend.
+<hr>
 
-3️⃣ Application Tier (Backend)
+<h3>3.4 🗄 Database Tier</h3>
 
-Internal Load Balancer
+<ul>
+  <li>Amazon RDS (MySQL / PostgreSQL)</li>
+  <li>Private Subnet</li>
+  <li>DB Subnet Group</li>
+  <li>Security Group</li>
+</ul>
 
-Target Group
+<p><strong>Purpose:</strong> Stores application data securely and is not publicly accessible.</p>
 
-Launch Template
+<hr>
 
-Auto Scaling Group
+<h3>3.5 🔐 Bastion Host</h3>
 
-Private Subnets
+<ul>
+  <li>EC2 Instance in Public Subnet</li>
+  <li>SSH Access (Restricted)</li>
+</ul>
 
-Security Group
+<p><strong>Purpose:</strong> Provides secure administrative access to private EC2 instances.</p>
 
-Purpose:
-Processes business logic and communicates with database.
+<hr>
 
-4️⃣ Database Tier
+<h2>📂 4. Project Structure</h2>
 
-Amazon RDS (MySQL/PostgreSQL)
-
-Private Subnet
-
-DB Subnet Group
-
-Security Group
-
-Purpose:
-Stores application data securely (not publicly accessible).
-
-5️⃣ Bastion Host
-
-EC2 Instance in Public Subnet
-
-SSH Access
-
-Used to access private servers securely
-
-📂 Project Structure
+<pre>
 .
 ├── provider.tf
 ├── variable.tf
@@ -122,76 +135,86 @@ Used to access private servers securely
 ├── outputs.tf
 ├── .gitignore
 └── README.md
+</pre>
 
-⚙️ Prerequisites
+<hr>
 
-AWS Account
+<h2>⚙ 5. Prerequisites</h2>
 
-AWS CLI configured
+<ul>
+  <li>AWS Account</li>
+  <li>AWS CLI Configured (<code>aws configure</code>)</li>
+  <li>Terraform Installed</li>
+  <li>SSH Key Pair Created in AWS</li>
+</ul>
 
-Terraform installed
+<hr>
 
-SSH key pair created
+<h2>🚀 6. Deployment Steps</h2>
 
-🚀 Deployment Steps
-1️⃣ Initialize Terraform
-terraform init
+<h3>Step 1: Initialize Terraform</h3>
+<pre><code>terraform init</code></pre>
 
-2️⃣ Validate Configuration
-terraform validate
+<h3>Step 2: Validate Configuration</h3>
+<pre><code>terraform validate</code></pre>
 
-3️⃣ Plan Infrastructure
-terraform plan
+<h3>Step 3: Plan Infrastructure</h3>
+<pre><code>terraform plan</code></pre>
 
-4️⃣ Apply Infrastructure
-terraform apply
+<h3>Step 4: Apply Infrastructure</h3>
+<pre><code>terraform apply</code></pre>
 
+<p>Type <strong>yes</strong> to confirm deployment.</p>
 
-Type yes to confirm.
+<hr>
 
-🔐 Security Best Practices Implemented
+<h2>🔐 7. Security Best Practices Implemented</h2>
 
-Private subnets for backend & RDS
+<ul>
+  <li>Backend and RDS deployed in Private Subnets</li>
+  <li>RDS not publicly accessible</li>
+  <li>Restricted Security Group rules</li>
+  <li>Bastion Host for controlled SSH access</li>
+  <li>Tier isolation</li>
+  <li>Auto Scaling for resilience</li>
+</ul>
 
-RDS not publicly accessible
+<hr>
 
-Security Groups with restricted access
+<h2>📈 8. High Availability Features</h2>
 
-Bastion host for SSH
+<ul>
+  <li>Multi-AZ Deployment</li>
+  <li>Auto Scaling Groups</li>
+  <li>Load Balancers with Health Checks</li>
+  <li>NAT Gateway for private subnet outbound access</li>
+</ul>
 
-Separation of tiers
+<hr>
 
-Auto Scaling for high availability
+<h2>🧹 9. Destroy Infrastructure</h2>
 
-📈 High Availability Features
+<pre><code>terraform destroy</code></pre>
 
-Multi-AZ deployment
+<hr>
 
-Auto Scaling Groups
+<h2>🛠 10. Future Improvements</h2>
 
-Load Balancers
+<ul>
+  <li>S3 Remote Backend with DynamoDB State Locking</li>
+  <li>CloudWatch Monitoring & Alarms</li>
+  <li>AWS WAF Integration</li>
+  <li>CI/CD Pipeline Integration</li>
+  <li>SSL Certificate using ACM</li>
+  <li>Route 53 DNS Configuration</li>
+</ul>
 
-NAT Gateway for private subnet internet access
+<hr>
 
-🧹 Destroy Infrastructure
+<h2>👨‍💻 11. Author</h2>
 
-To delete all resources:
-
-terraform destroy
-
-🛠 Future Improvements
-
-Add S3 Remote Backend
-
-Enable CloudWatch Monitoring
-
-Add WAF
-
-CI/CD Integration
-
-SSL with ACM
-
-👨‍💻 Author
-
-Mohammad Samad Ahmed
+<p>
+<strong>Mohammad Samad Ahmed</strong><br>
 Cloud & DevOps Enthusiast
+<a href="https://www.linkedin.com/in/mohd-samad-ahmed-5570aa378/" target="_blank">LinkedIn Profile</a>
+</p>
